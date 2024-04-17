@@ -26,6 +26,10 @@ public class CustomerActionsImpl extends UnicastRemoteObject implements Customer
     
     @Override
     public User addItemToShoppingCart(User customer, Product product) throws RemoteException {
+        if (customer == null || product == null) {
+            System.out.println("Customer or product is null");
+            return null;
+        }
         System.out.println("Received request to add product to shopping cart");
         for (Product p : products.getProducts()) {
             if (p.getName().equals(product.getName())) {
