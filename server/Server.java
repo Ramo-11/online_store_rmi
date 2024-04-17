@@ -4,9 +4,9 @@ import java.rmi.Naming;
 import java.util.ArrayList;
 import java.util.List;
 
-import common.AdminActions;
+import common.AdminActionsInterface;
+import common.CustomerActionsInterface;
 import common.Authorization;
-import common.CustomerActions;
 import common.DataController;
 import common.Product;
 import common.Products;
@@ -25,10 +25,10 @@ public class Server {
     public void start() {
         loadData();
         try {
-            AdminActions remoteAdminObject = new AdminActionsImpl();
+            AdminActionsInterface remoteAdminObject = new AdminActionsImpl();
             Naming.rebind("rmi://localhost:4444/RemoteAdminActions", remoteAdminObject);
 
-            CustomerActions remoteCustomerObject = new CustomerActionsImpl();
+            CustomerActionsInterface remoteCustomerObject = new CustomerActionsImpl();
             Naming.rebind("rmi://localhost:4444/RemoteCustomerActions", remoteCustomerObject);
 
             Authorization remoteAuthObject = new AuthorizationImpl(admins, customers);

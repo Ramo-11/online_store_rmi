@@ -4,13 +4,13 @@ import java.util.List;
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
 
-import common.AdminActions;
+import common.AdminActionsInterface;
 import common.DataController;
 import common.Product;
 import common.Products;
 import common.User;
 
-public class AdminActionsImpl extends UnicastRemoteObject implements AdminActions {
+public class AdminActionsImpl extends UnicastRemoteObject implements AdminActionsInterface {
 
     private Products products;
     private List<User> admins;

@@ -19,4 +19,11 @@ public class MenuHandler {
         System.out.println("7. Remove a customer account");
         System.out.println("8. Exit\n");
     }
+
+    public static void displayCustomerMenu() {
+        System.out.println("\n1- Browse Products");
+        System.out.println("2- View items in shopping cart");
+        System.out.println("3- Checkout shopping cart");
+        System.out.println("4- Exit\n");
+    }
 }

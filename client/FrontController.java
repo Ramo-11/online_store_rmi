@@ -3,8 +3,8 @@ package client;
 import common.Request;
 import common.User;
 import common.Products;
-import common.AdminActions;
-import common.CustomerActions;
+import common.AdminActionsInterface;
+import common.CustomerActionsInterface;
 
 import common.Authorization;
 
@@ -17,7 +17,7 @@ public class FrontController {
     private Authorization authorization;
 
     public FrontController(List<User> admins, List<User> customers, Products products, 
-                            Authorization authService, AdminActions adminService, CustomerActions customerService) {
+                            Authorization authService, AdminActionsInterface adminService, CustomerActionsInterface customerService) {
         this.adminController = new AdminController(adminService);
         this.customerController = new CustomerController(customerService);
         this.authorization = authService;

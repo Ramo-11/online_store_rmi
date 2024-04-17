@@ -2,11 +2,11 @@ package client;
 
 import java.rmi.Naming;
 
-import common.AdminActions;
-import common.CustomerActions;
+import common.AdminActionsInterface;
+import common.CustomerActionsInterface;
 import common.Authorization;
 
-public class ServiceFactoryImpl implements ServiceFactory {
+public class ServiceFactoryImpl implements ServiceFactoryInterface {
     private String baseUrl;
 
     public ServiceFactoryImpl(String baseUrl) {
@@ -14,13 +14,13 @@ public class ServiceFactoryImpl implements ServiceFactory {
     }
 
     @Override
-    public AdminActions createAdminService() throws Exception {
-        return (AdminActions) Naming.lookup(baseUrl + "/RemoteAdminActions");
+    public AdminActionsInterface createAdminService() throws Exception {
+        return (AdminActionsInterface) Naming.lookup(baseUrl + "/RemoteAdminActions");
     }
 
     @Override
-    public CustomerActions createCustomerService() throws Exception {
-        return (CustomerActions) Naming.lookup(baseUrl + "/RemoteCustomerActions");
+    public CustomerActionsInterface createCustomerService() throws Exception {
+        return (CustomerActionsInterface) Naming.lookup(baseUrl + "/RemoteCustomerActions");
     }
 
     @Override

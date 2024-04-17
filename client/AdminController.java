@@ -1,7 +1,7 @@
 package client;
 
 import common.User;
-import common.AdminActions;
+import common.AdminActionsInterface;
 import common.MenuHandler;
 import common.Product;
 import common.Products;
@@ -12,10 +12,10 @@ import java.util.Scanner;
 @SuppressWarnings("unused")
 public class AdminController {
     private User admin;
-    private AdminActions adminActions;
+    private AdminActionsInterface adminActions;
     private Scanner scanner = new Scanner(System.in);
 
-    public AdminController(AdminActions adminActions) {
+    public AdminController(AdminActionsInterface adminActions) {
         this.adminActions = adminActions;
     }
 
@@ -56,7 +56,7 @@ public class AdminController {
                     break;
                 case 8:
                     System.out.println("Exiting...");
-                    break;
+                    return;
                 default:
                     System.out.println("Invalid choice. Please try again.");
             }

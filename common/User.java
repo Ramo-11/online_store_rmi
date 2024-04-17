@@ -7,16 +7,14 @@ public class User implements Serializable {
     private String accountPin;
     private String type;
     private Products products;
-    // protected DataController controller;
-    // protected Helpers helper;
+    private Products shoppingCart;
 
     public User() {
         this.name = "Default Name";
         this.accountPin = "12345";
         this.type = "customer";
         this.products = new Products();
-        // controller = new DataController();
-        // helper = new Helpers();
+        this.shoppingCart = new Products();
     }
 
     public User(String name, String accountPin, String type) {
@@ -24,6 +22,7 @@ public class User implements Serializable {
         this.accountPin = accountPin;
         this.type = type;
         this.products = new Products();
+        this.shoppingCart = new Products();
     }
 
     public User(String name, String accountPin, String type, Products products) {
@@ -31,6 +30,7 @@ public class User implements Serializable {
         this.accountPin = accountPin;
         this.type = type;   
         this.products = products;
+        this.shoppingCart = new Products();
     }
 
     public void setName(String name) {
@@ -59,5 +59,13 @@ public class User implements Serializable {
 
     public void setProducts(Products products) {
         this.products = products;
+    }
+
+    public Products getShoppingCart() {
+        return this.shoppingCart;
+    }
+
+    public void addItemToShoppingCart(Product product) {
+        this.shoppingCart.addProduct(product);
     }
 }

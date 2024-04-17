@@ -3,7 +3,7 @@ package common;
 import java.rmi.Remote;
 import java.rmi.RemoteException;
 
-public interface AdminActions extends Remote {
+public interface AdminActionsInterface extends Remote {
     public Products getAllProducts() throws RemoteException;
     public boolean addProduct(Product product) throws RemoteException;
     public boolean removeProduct(String name) throws RemoteException;

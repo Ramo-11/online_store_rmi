@@ -13,8 +13,8 @@ import common.Product;
 import common.Products;
 import common.Request;
 import common.User;
-import common.AdminActions;
-import common.CustomerActions;
+import common.AdminActionsInterface;
+import common.CustomerActionsInterface;
 import common.DataController;
 import common.Authorization;
 
@@ -23,8 +23,8 @@ public class Client {
     List<User> customers;
     Products products;
 
-    AdminActions adminService;
-    CustomerActions customerService;
+    AdminActionsInterface adminService;
+    CustomerActionsInterface customerService;
     Authorization authService;
 
     CustomerController customerController;
@@ -37,7 +37,7 @@ public class Client {
 
     @SuppressWarnings("resource")
     public void start() {
-        ServiceFactory serviceFactory = new ServiceFactoryImpl("rmi://in-csci-rrpc02.cs.iupui.edu:4444");
+        ServiceFactoryInterface serviceFactory = new ServiceFactoryImpl("rmi://in-csci-rrpc02.cs.iupui.edu:4444");
         createServices(serviceFactory);
         loadData();
         FrontController frontController = new FrontController(admins, customers, products, 
@@ -108,7 +108,7 @@ public class Client {
         }
     }
 
-    private void createServices(ServiceFactory serviceFactory) {
+    private void createServices(ServiceFactoryInterface serviceFactory) {
         try {
             adminService = serviceFactory.createAdminService();
             customerService = serviceFactory.createCustomerService();
