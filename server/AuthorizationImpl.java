@@ -19,6 +19,7 @@ public class AuthorizationImpl extends UnicastRemoteObject implements Authorizat
         this.customers = customers;
     }
 
+    @Override
     public boolean authorize(User userToLogIn) throws RemoteException {
         this.admins = DataController.downloadUsers("admin");
         this.customers = DataController.downloadUsers("customer");
@@ -38,7 +39,6 @@ public class AuthorizationImpl extends UnicastRemoteObject implements Authorizat
     }
 
     private boolean authorizeAdmin(User adminToLogIn) {
-        System.out.println("Admins size: " + admins.size());
         for (User admin : admins) {
             if (admin.getName().equals(adminToLogIn.getName()) && admin.getAccountPin().equals(adminToLogIn.getAccountPin())) {
                 System.out.println("Admin authorized: " + admin.getName());
@@ -60,6 +60,7 @@ public class AuthorizationImpl extends UnicastRemoteObject implements Authorizat
         return false;
     }
 
+    @Override
     public boolean createAccount(User customerToCreate) throws RemoteException {
         if (customerToCreate == null || customers == null) {
             System.out.println("Error in AuthService.createAccount: user is null or users list is empty");
