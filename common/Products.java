@@ -27,8 +27,10 @@ public class Products implements Serializable {
             System.out.println("No products available");
             return;
         }
-        System.out.println("Products:");
         for (Product product : products) {
+            if (product.getQuantity() == 0) {
+                continue;
+            }
             System.out.println(product);
             System.out.println();
         }
@@ -39,7 +41,6 @@ public class Products implements Serializable {
             System.out.println("Shopping cart is empty");
             return;
         }
-        System.out.println("Shopping Cart:");
         for (Product product : products) {
             System.out.println("Name: " + product.getName());
             System.out.println("Quantity: " + product.getQuantity());

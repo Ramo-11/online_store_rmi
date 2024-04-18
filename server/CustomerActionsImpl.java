@@ -21,29 +21,38 @@ public class CustomerActionsImpl extends UnicastRemoteObject implements Customer
     @Override
     public Products browseProducts() throws RemoteException {
         System.out.println("Received request to browse products\n");
+        this.products = DataController.downloadProducts();
         return products;
+    }
+
+    @Override
+    public User viewShoppingCart(User customer) throws RemoteException {
+        System.out.println("Received request to view shopping cart");
+        return customer;
     }
     
     @Override
     public User addItemToShoppingCart(User customer, Product product) throws RemoteException {
         if (customer == null || product == null) {
             System.out.println("Customer or product is null");
-            return null;
+            return customer;
         }
         System.out.println("Received request to add product to shopping cart");
         for (Product p : products.getProducts()) {
             if (p.getName().equals(product.getName())) {
                 if (p.getQuantity() < product.getQuantity()) {
                     System.out.println("Not enough stock");
-                    return null;
+                    return customer;
                 }
                 customer.addItemToShoppingCart(product);
+                p.setQuantity(p.getQuantity() - product.getQuantity());
+                DataController.uploadProducts(products);
                 System.out.println("Product was added to shopping cart");
                 return customer;
             }
         }
         System.out.println("Product not found");
-        return null;
+        return customer;
     }
 
     @Override

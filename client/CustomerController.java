@@ -54,6 +54,10 @@ public class CustomerController {
 
     private void browseProducts() {
         try {
+            if (customerActions.browseProducts().getProducts().isEmpty()) {
+                System.out.println("No products available");
+                return;
+            }
             customerActions.browseProducts().displayProducts();
             scanner.nextLine();
             System.out.println("Enter product name to add to cart");
@@ -71,13 +75,18 @@ public class CustomerController {
     }
 
     private void viewShoppingCart() {
-        customer.getShoppingCart().displayCart();
+        try {
+            customer = customerActions.viewShoppingCart(customer);
+            customer.getShoppingCart().displayCart();
+        } catch (RemoteException e) {
+            e.printStackTrace();
+        }
     }
 
     private void checkoutCart() {
         try {
             customer = customerActions.checkoutCart(customer);
-            if (customer != null) {
+            if (customer.getShoppingCart().size() == 0) {
                 System.out.println("Thanks for shopping with us");
             } else {
                 System.out.println("Failed to checkout shopping cart, check server logs");
@@ -91,7 +100,7 @@ public class CustomerController {
         try {
             Product product = new Product(name, 0, "", quantity);
             customer = customerActions.addItemToShoppingCart(customer, product);
-            if (customer != null) {
+            if (customer.getShoppingCart().size() > 0) {
                 return true;
             }
         } catch (RemoteException e) {
