@@ -11,7 +11,13 @@ In rrpc01, go to the A3 directory (which has the code) and type:
 ```shell
 make client
 ```
-Start using the program
+Start using the program  
+Alternatively, you can use the jars:
+```shell
+make jars
+```
+Start the server jar `java -jar Server.jar` then the client jar `java -jar Client.jar` 
+
 The pdf file has pictures containing the program running
 
 Note:  
